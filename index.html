@@ -6,11 +6,12 @@
     <title>My Valentine</title>
     <link rel="stylesheet" href="resources/styles.css">
     <script>
-        function growYesButton() {
+         function growYesButton() {
             const yesButton = document.getElementById('yesButton');
             const currentScale = yesButton.style.transform.match(/scale\(([^)]+)\)/);
-            const newScale = currentScale ? parseFloat(currentScale[1]) + 0.1 : 1.1;
+            const newScale = currentScale ? parseFloat(currentScale[1]) + scaleIncrement : 1.1;
             yesButton.style.transform = `scale(${newScale})`;
+            scaleIncrement += 0.5;
         }
     </script>
 </head>
