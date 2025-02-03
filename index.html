@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Valentine</title>
+    <link rel="stylesheet" href="resources/styles.css">
+    <script>
+        function growYesButton() {
+            const yesButton = document.getElementById('yesButton');
+            const currentScale = yesButton.style.transform.match(/scale\(([^)]+)\)/);
+            const newScale = currentScale ? parseFloat(currentScale[1]) + 0.1 : 1.1;
+            yesButton.style.transform = `scale(${newScale})`;
+        }
+    </script>
+</head>
+<body>
+    <div class="container"></div>
+        <h1>Will You Be My Valentine?</h1>
+        <img src="resources/FDBDDE94-0DEB-43C5-95A5-3A97859C7730.JPEG" alt="Valentine Image">
+        <p>Will you be my Valentine</p>
+        <div class="buttons">
+            <button id="yesButton" class="grow" onclick="window.location.href='affirmative.html'">Yes</button>
+            <button onclick="growYesButton()">No</button>
+            <div class="pixel-art-container left">
+                <img src="resources/3b449e33-a16e-4cf3-95ff-1f7f52cbfb57.png" alt="Left Pixel Art" class="pixel-art">
+                <p>Gaspar & Kika</p>
+            </div>
+            
+            <div class="pixel-art-container right">
+                <img src="resources/ae42169e-594e-459f-87f6-60bfa62d203f.png" alt="Right Pixel Art" class="pixel-art">
+                <p>Cristiano Ronaldo & Amora</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

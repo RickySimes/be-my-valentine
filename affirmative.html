@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #ffe6e6;
+            font-family: "Arial", sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            color: #ff4d4d;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Full viewport height */
+            margin: auto;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel img {
+            width: calc(100% / 3); /* Display three images at a time */
+            flex-shrink: 0;
+            display: block;
+            object-position: center;
+            object-fit: cover; /* Ensure images do not stretch */
+            height: 100%; /* Ensure images cover the height of the container */
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #666;
+            margin: 20px 0;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .buttons button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: background-color 0.3s ease; 
+            position: relative;
+            display: inline-block;
+        }
+
+        .buttons button:hover {
+            background-color: #e60000;
+        }
+
+        .carousel-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .carousel-buttons button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: background-color 0.3s ease; 
+        }
+
+        .carousel-buttons button:hover {
+            background-color: #e60000;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>YIPPIEEEEEEEEEEEEEE</h1>
+        <div class="carousel">
+            <div class="carousel-track">
+                <!-- Images will be inserted here by JavaScript -->
+            </div>
+        </div>
+        <div class="carousel-buttons">
+            <button onclick="showPrevImage()">Previous</button>
+            <button onclick="showNextImage()">Next</button>
+        </div>
+    </div>   
+</body>
+
+</html>
+<script>
+    const imagePaths = [];
+    for (let i = 1; i <= 22; i++) {
+        imagePaths.push(`resources/pictures/IMG_${i}.JPG`);
+    }
+
+    const carouselTrack = document.querySelector('.carousel-track');
+    const imagesPerView = 3;
+
+    // Clone first and last few images for infinite effect
+    const firstImages = imagePaths.slice(0, imagesPerView).map(path => `<img src="${path}" alt="Image">`).join('');
+    const lastImages = imagePaths.slice(-imagesPerView).map(path => `<img src="${path}" alt="Image">`).join('');
+
+    carouselTrack.innerHTML = lastImages + imagePaths.map(path => `<img src="${path}" alt="Image">`).join('') + firstImages;
+
+    let currentIndex = imagesPerView;
+    const images = document.querySelectorAll('.carousel img');
+    const totalImages = images.length;
+
+    function updateCarousel() {
+        carouselTrack.style.transition = 'transform 0.5s ease-in-out';
+        carouselTrack.style.transform = `translateX(-${currentIndex * (100 / imagesPerView)}%)`;
+    }
+
+    function showNextImage() {
+        currentIndex++;
+        updateCarousel();
+        if (currentIndex >= totalImages - imagesPerView) {
+            setTimeout(() => {
+                carouselTrack.style.transition = 'none';
+                currentIndex = imagesPerView;
+                carouselTrack.style.transform = `translateX(-${currentIndex * (100 / imagesPerView)}%)`;
+            }, 500);
+        }
+    }
+
+    function showPrevImage() {
+        currentIndex--;
+        updateCarousel();
+        if (currentIndex < imagesPerView) {
+            setTimeout(() => {
+                carouselTrack.style.transition = 'none';
+                currentIndex = totalImages - imagesPerView * 2;
+                carouselTrack.style.transform = `translateX(-${currentIndex * (100 / imagesPerView)}%)`;
+            }, 500);
+        }
+    }
+
+    updateCarousel();
+</script>
