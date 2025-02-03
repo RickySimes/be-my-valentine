@@ -54,6 +54,12 @@
             height: 100%; /* Ensure images cover the height of the container */
         }
 
+        @media (max-width: 600px) {
+            .carousel img {
+                width: 100%; /* Display one image at a time on small screens */
+            }
+        }
+
         p {
             font-size: 1.2em;
             color: #666;
@@ -126,7 +132,7 @@
     }
 
     const carouselTrack = document.querySelector('.carousel-track');
-    const imagesPerView = 3;
+    const imagesPerView = window.innerWidth <= 600 ? 1 : 3;
 
     // Clone first and last few images for infinite effect
     const firstImages = imagePaths.slice(0, imagesPerView).map(path => `<img src="${path}" alt="Image">`).join('');
